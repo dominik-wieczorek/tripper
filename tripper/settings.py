@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+from neomodel import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_neomodel'
 ]
 
 MIDDLEWARE = [
@@ -86,7 +86,7 @@ DATABASES = {
     }
 }
 
-DATABASE_URL = 'bolt://neo4j:neo4j@localhost:7687'
+config.DATABASE_URL = 'bolt://neo4j:neo4j@neo4j:7474'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
