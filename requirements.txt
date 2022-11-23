@@ -5,6 +5,7 @@ neo4j-driver==1.7.2
 neobolt==1.7.17
 neomodel==3.3.2
 neotime==1.7.4
+psycopg2-binary==2.9.5
 pytz==2022.6
 six==1.16.0
 sqlparse==0.4.3

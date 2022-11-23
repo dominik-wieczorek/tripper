@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   backend:
     build: .
@@ -9,6 +9,7 @@ services:
       - "8000:8000"
     depends_on:
       - neo4j
+      - postgres
     networks:
       - network
     links:
@@ -30,6 +31,22 @@ services:
       - NEO4J_dbms_memory_pagecache_size=1G
       - NEO4J_dbms.memory.heap.initial_size=1G
       - NEO4J_dbms_memory_heap_max__size=1G
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - network
 networks:
   network:
     driver: bridge
+
+volumes:
+  db: {}
