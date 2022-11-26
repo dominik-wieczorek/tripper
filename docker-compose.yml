@@ -18,6 +18,8 @@ services:
     environment:
       NEO4J_BOLT_URL: 'bolt://$NEO4J_USER:$NEO4J_PASSWORD@neo4j:7687'
       DJANGO_SETTINGS_MODULE: 'tripper.settings'
+    env_file:
+      - .env
 
   neo4j:
     image: neo4j:4.4.6
