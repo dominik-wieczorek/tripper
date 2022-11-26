@@ -86,7 +86,8 @@ DATABASES = {
     }
 }
 
-config.DATABASE_URL = 'bolt://neo4j:neo4j@neo4j:7474'
+# Neo4J configuration
+config.DATABASE_URL = os.environ.get('NEO4J_BOLT_URL')
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -128,9 +129,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-NEOMODEL_NEO4J_BOLT_URL = os.environ.get('NEO4J_BOLT_URL', 'bolt://username:password@localhost:7687')
-NEOMODEL_SIGNALS = True
-NEOMODEL_FORCE_TIMEZONE = False
-NEOMODEL_ENCRYPTED_CONNECTION = True
-NEOMODEL_MAX_POOL_SIZE = 50

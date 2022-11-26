@@ -1,5 +1,6 @@
 version: '3.8'
 services:
+
   backend:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -14,23 +15,23 @@ services:
       - network
     links:
       - neo4j
+    environment:
+      NEO4J_BOLT_URL: 'bolt://$NEO4J_USER:$NEO4J_PASSWORD@neo4j:7687'
+      DJANGO_SETTINGS_MODULE: 'tripper.settings'
 
   neo4j:
-    image: neo4j:5.1
+    image: neo4j:4.4.6
     restart: unless-stopped
     ports:
       - "7474:7474"
       - "7687:7687"
+    networks:
+      - network
     volumes:
-      - ./conf:/conf
-      - ./data:/data
-      - ./import:/import
-      - ./logs:/logs
-      - ./plugins:/plugins
+      - neo4j_data:/data
     environment:
-      - NEO4J_dbms_memory_pagecache_size=1G
-      - NEO4J_dbms.memory.heap.initial_size=1G
-      - NEO4J_dbms_memory_heap_max__size=1G
+      NEO4J_AUTH: $NEO4J_USER/$NEO4J_PASSWORD
+
   postgres:
     image: postgres:15
     restart: always
@@ -44,9 +45,11 @@ services:
       - db:/var/lib/postgresql/data
     networks:
       - network
+
 networks:
   network:
     driver: bridge
 
 volumes:
   db: {}
+  neo4j_data: {}
