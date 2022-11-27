@@ -12,8 +12,8 @@ RUN pip install --no-cache-dir -r /tmp/requirements.txt && rm -rf /tmp/requireme
 WORKDIR /app
 
 USER app_user:app_user
-COPY --chown=app_user:app_user . .
+COPY --chown=app_user:app_user .. .
 
-RUN chmod +x docker/*.sh
-ENTRYPOINT [ "docker/entrypoint.sh" ]
-CMD [ "docker/start.sh" ]
+RUN chmod +x docker/django/*.sh
+ENTRYPOINT [ "docker/django/entrypoint.sh" ]
+CMD [ "docker/django/start.sh" ]
