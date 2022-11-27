@@ -43,6 +43,7 @@ done
 
 cd /app
 neomodel_install_labels tripper/models.py
+python manage.py collectstatic --noinput
 python manage.py migrate
 
 exec "$@"
